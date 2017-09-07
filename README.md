@@ -40,9 +40,9 @@ playvideo | encuentra y reproduce videos | [Aquí](http://stevenhickson.blogspot
 downloader | encontrar y descargar el mejor torrent | [Aquí](http://stevenhickson.blogspot.com/2013/03/automatically-downloading-torrents-with.html)
 gvapi | comprueba, envía y elimina mensajes SMS | [Aquí](http://stevenhickson.blogspot.com/2013/05/using-google-voice-c-api.html)
 gtextcommand | comprueba mensajes sms cada minuto y ejecuta comandos desde ellos | [Aquí](http://stevenhickson.blogspot.com/2013/03/controlling-raspberry-pi-via-text.html)
-youtube | streams de youtube | [En Navegador](http://stevenhickson.blogspot.com/2013/06/playing-youtube-videos-in-browser-on.html) and [en Pi](http://stevenhickson.blogspot.com/2013/04/using-youtube-on-raspberry-pi-without.html)
+youtube | streams de youtube | [En Navegador](http://stevenhickson.blogspot.com/2013/06/playing-youtube-videos-in-browser-on.html) y [en Pi](http://stevenhickson.blogspot.com/2013/04/using-youtube-on-raspberry-pi-without.html)
 youtube-safe | transmite otros archivos de video | [Hulu y Vimeo](http://stevenhickson.blogspot.com/2013/06/getting-huluvimeo-to-work-on-raspberry.html) y [otros](http://stevenhickson.blogspot.com/2013/06/streaming-other-hd-video-sites-on.html)
-voicecommand | ejecuta comandos de voz | [Aquí](http://stevenhickson.blogspot.com/2013/05/voice-command-v20-for-raspberry-pi.html) and [Aquí](http://stevenhickson.blogspot.com/2013/04/voice-control-on-raspberry-pi.html)
+voicecommand | ejecuta comandos de voz | [Aquí](http://stevenhickson.blogspot.com/2013/05/voice-command-v20-for-raspberry-pi.html) y [Aquí](http://stevenhickson.blogspot.com/2013/04/voice-control-on-raspberry-pi.html)
 
 Copyright
 
