@@ -2,6 +2,7 @@
 
 # No probado al 100%
 
+Traducción al Español de PiAUSuite Original de Steven Hickson
 
 # Interfaz de usuario alternativa
 
