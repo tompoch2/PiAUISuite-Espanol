@@ -32,7 +32,7 @@ Va a:
 * preguntar si desea instalar las dependencias
 * para instalar cada secuencia de comandos
 
-## Diferentes Partes
+## Componentes
 
 Nombre | Proposito | Blogpost
 -----|---------|---------
