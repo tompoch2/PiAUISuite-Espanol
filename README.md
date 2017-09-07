@@ -1,5 +1,7 @@
 # PiAUSuite-Espa-ol-
-PiAUSuite (Español)
+# PiAUSuite (Español)
+
+# No probado al 100%
 
 # Interfaz de usuario alternativa
 
