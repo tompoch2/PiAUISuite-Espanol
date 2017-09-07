@@ -44,7 +44,7 @@ function download() {
     echo "Instalar downloader? s/n"
     echo "Este script automatiza la descarga de torrents. Ej. 'download wheezy' encuentra y descarga la más nueva imagen debian wheezy"
     read option
-    if [ $option == "y" ] || [ $option == "Y" ] ; then
+    if [ $option == "s" ] || [ $option == "S" ] ; then
     echo "Instalando downloader"
     echo "Ingrese Host: ej, localhost (probablemente sea este)"
     read host
