@@ -1,0 +1,145 @@
+.\" Manpage for playvideo.
+.\" Contact help@stevenhickson to add input or correct errors or typos.
+.TH man 8 "13 May 2013" "2.0" "voicecommand man page"
+.SH NAME
+voicecommand \- Escucha las cadenas definidas por el usuario y ejecuta el comando correspondiente
+.SH SYNOPSIS
+.I "voicecommand [OPTIONS]..."
+.SH DESCRIPTION
+voicecommand fue desarrollado para el Raspberry Pi, pero funcionará en cualquier sistema linux con un micrófono adjunto. Es un programa crudo, que utiliza comparaciones básicas para determinar si su voicecommand se ajusta a un formato especificado en un archivo de configuración; lo hace, ejecuta el comando linux correspondiente. Soporta autocompletar y variables, así como verificación de comandos, un modo continuo y otras opciones.
+Para ayuda / comentarios / preguntas, no dude en enviarme un e-mail a help@stevenhickson.com. Respondo esporádicamente pero finalmente respondo.
+.PP
+
+.TP
+Nota: Todas las banderas que activan algo están desactivadas se pueden revertir y sobrescribir siguiendo con un 1 o 0. Por ejemplo, si tiene! Continuous == 1 en su archivo de configuración, puede ejecutar voicecommand -c0 para activar continuo apagado.
+
+.SH OPTIONS
+.TP
+.I "?"
+Igual que -h
+
+.TP
+.I "-b"
+Desactiva el audio FILL. El propósito de esto fue porque el Raspbery Pi (o al menos mina) corta los primeros segundos de audio. Este indicador desactiva esta función. Usted sólo debe preocuparse de esto si escucha llenar antes de todo lo que dice.
+
+.TP
+.I "-c"
+Hace que voicecommand se ejecute en modo continuo, donde seguirá escuchando una y otra vez.
+
+.TP
+.I "-d"
+Establece la duración de la escucha del audio para comandos de voz
+
+.TP
+.I "-D"
+Establece el hardware de audio. El valor predeterminado es plughw: 1,0
+-
+.TP
+.I "-e"
+Edita el archivo de configuración de voicecommand.
+.br
+El formato es voz==comando
+.br
+Puede usar cualquier carácter, excepto para las líneas de nuevo o ==
+.br
+Si la voz comienza con ~, el programa busca la palabra clave en cualquier lugar. Ejemplo: ~clima se recuperaría el tiempo o clima
+.br
+Puede utilizar ... al final del comando para especificar que todo después de la palabra clave dada debe ser opciones para el comando.
+.br
+.I "Ej: play==playvideo ..."
+.br
+Esto significa que si usted dice "play Futurama", se ejecutará el comando playvideo Futurama
+.br
+Puede usar $ # (donde # es cualquier número del 1 al 9) para representar una variable. Estos deben ir en orden de 1 a 9
+.br
+.I  "Ej: $1 temporada $2 episodio $3 == playvideo -s $2 -e $3 $1 "
+.br
+Esto significa que si usted dice juego de tronos temporada 1 episodio 2, se ejecutará playvideo con la bandera -s como 1, el -e bandera como 2, y el argumento principal como juego de tronos, es decir, playvideo -s1 -e2 juego de Tronos
+.br
+Debido a estas opciones, es importante que los argumentos vayan desde el más estricto hasta el menos estricto.
+.br
+Esto significa que ~ los argumentos probablemente deberían estar al final.
+.br
+También puede poner comentarios si la línea comienza con # y las opciones especiales si la línea comienza con un !
+.br
+Las opciones predeterminadas se muestran de la siguiente manera:
+.br
+.I "!keyword==pi,!verify==1,!continuous==1,!quiet==0,!ignore==0,!thresh==0.7,!maxResponse==-1"
+.br
+.I "api==BLANK,!filler==FILLER FILL,!response==Yes Sir?,!duration==3,!com_dur==2,!hardware==plughw:1,0,!language==en_us"
+.br
+Keyword, filler, and response aceptan cadenas. verifican, continúan, callan, e ignoran excepto 1 o 0 (verdadero o falso respectivamente). thresh exceptúa un número de punto flotante. Éstos le permiten configurar algunos de los indicadores como opciones permanentes (si están configurados, puede sobrescribirlos con las opciones de indicador).
+.br
+Puede configurar una API de WolframAlpha y maxResponse (el número de ramas) como! Api == XXXXXX-XXXXXXXXXX amd! MaxResponse == 3
+.br
+
+Ahora puede personalizar el soporte de idioma para el reconocimiento de voz y algo de texto a voz con el indicador de idioma. Busque su código de país y utilizelo. Ej. Para los Estados Unidos: !language==en_us, para España !language==es, para Alemania !language==de
+
+.TP
+.I "-f /my-location/config-file"
+Esto le permite cargar un archivo de configuración diferente ubicado en un lugar diferente. El predeterminado está en su directorio de inicio y es ~/.commands.conf
+.br
+El archivo de configuración debe formatearse de la misma manera.
+
+.TP
+.I "-h"
+Muestra esta página de manual.
+
+.TP
+.I "-i"
+Establece el modo de ignorar. Cuando se activa este indicador, si un comando no está en el archivo de configuración, no pasa nada. El comportamiento predeterminado es intentar encontrar una respuesta o respuesta a esa pregunta y luego hablarla. Esto desactiva ese comportamiento.
+
+.TP
+.I "-I string"
+Establece el modo de entrada forzada. Esto le permite probarlo sin el micrófono o obtenerlo para analizar la información mecanografiada. No funcionará en modo continuo con esto.
+
+.TP
+.I "-k word"
+Establece la palabra clave. El valor predeterminado es pi. Si se establece este indicador, los indicadores de verificación y continuo también se establecen, ya que esto sólo se comprueba durante esos dos modos.
+.br
+.I "	Ej. voicecommand -c -v -k Jarvis"
+
+.TP
+.I "-l"
+Establece la duración de la escucha de audio para la palabra clave. Esto es diferente al indicador -d que escucha los comandos de voz.
+
+.TP
+.I "-s"
+Ejecuta una operación de configuración que intenta establecer todas las opciones de configuración en el archivo de configuración para que voicecommand funcione correctamente
+
+.TP
+.I "-r word"
+Establece la respuesta. El valor predeterminado es "Sí señor?" (Para la versión 1.0, estaba listo.) Si esta respuesta es más de una palabra, debe ponerse entre comillas, de lo contrario no lo necesita.
+.br
+.I "	Ej. voicecommand -r Dime?"
+
+.TP
+.I "-t #"
+Establece el umbral de volumen para determinar si se ha hablado la palabra clave. Este debe ser un número de coma flotante. El valor predeterminado es 0.7, que funciona bien con la cámara/micrófono Logitech C310 de aproximadamente 6 pies de distancia..br
+.I "    Ex. voicecommand -t 1.2"
+
+.TP
+.I "-p"
+Establece el modo de paso a través de modo que en lugar de ejecutar los comandos, simplemente los imprime. Esto se va a utilizar para el complemento XBMC y la aplicación de Android.
+
+.TP
+.I "-q"
+Establece el modo silencioso activado para que el comando de voz nunca hable a través de la salida de audio. Todavía imprime todo pero no responde nunca. Esto incluye la respuesta de palabras clave.
+
+.TP
+.I "-v"
+Hace que voicecommand compruebe la palabra clave. Esto sólo ocurre en modo continuo, por lo que si esta bandera está establecida, la bandera continua también se establecerá. El modo predeterminado es no verificar. Cuando voicecommand escucha cualquier sonido por encima del umbral, dice que la respuesta escucha un comando. La palabra clave predeterminada es pi. Cuando se establece el indicador de verificación, después de que se alcanza el umbral, voicecommand verifica que la palabra clave fue hablado.
+
+.SH AUTHOR
+.I "Steven Hickson (help@stevenhickson.com)"
+.SH BUGS
+
+No hay errores conocidos. Para reportar errores, envíe una descripción clara a help@stevenhickson.com
+Dado que este programa es bastante crudo, los errores tipográficos de los usuarios podrían causar fallos / respuestas fallidas. Por favor, lea la página de manual antes de enviar un error.
+.SH COPYRIGHT
+Copyright © 2013 Steven Hickson. Licencia GPLv3 +: GNU GPL versión 3 o posterior <http://gnu.org/licenses/gpl.html>.
+Éste es software libre: usted es libre de cambiar y de redistribuirlo mientras usted dé crédito al autor e incluya esta licencia. No hay GARANTÍA, en la medida permitida por la ley.
+.SH HISTORY
+Esta es la segunda versión principal de este programa
+.SH VER TAMBIÉN
+http://stevenhickson.blogspot.com/

@@ -1,0 +1,79 @@
+.\" Manpage for gvapi.
+.\" Ponte en contacto conmigo @stevenhickson para agregar información o corregir errores o errores ortográficos.
+.TH man 8 "23 May 2013" "2.0" "gvapi man page"
+.SH NAME
+gvapi \- Use of Google voice API in order to send and receive SMS
+.SH SYNOPSIS
+.I "gvapi [OPTIONS]..."
+.SH DESCRIPTION
+gvapi fue compilado para el uso con la automatización casera en el Raspberry Pi pero trabajará en cualquier sistema del linux con una conexión a internet. Utiliza curl y boost regex para iniciar sesión y almacena la cookie en / dev / shm. Sólo se registra una vez cada 24 horas para ahorrar tiempo. Soporta una multitud de diferentes opciones y parámetros.
+Para ayuda / comentarios / preguntas, no dude en enviarme un e-mail a me@stevenhickson.com. Respondo esporádicamente pero finalmente respondo.
+.PP
+.SH OPTIONS
+.TP
+.I "-?"
+Same as -h
+
+.TP
+.I "-c"
+Comprueba los mensajes de texto entrantes para ver si tiene algo no leído. Lo marcará lo que salga como leído a menos que usted también utilice la bandera -r. Si incluye un número con el indicador -n, puede especificar que sólo compruebe los mensajes recibidos de ese número. También puede utilizar el indicador -k para especificar que el mensaje debe comenzar con una determinada palabra clave.
+
+.TP
+.I "-d"
+Establece el modo de depuración activado. También puede especificar el modo de depuración de 1 a 3, donde 3 es el más detallado.
+.br
+.I "    Ej: gvapi -c -d2"
+
+.TP
+.I "-h"
+Pide ayuda rápida para el uso general de gvapi.
+
+.TP
+.I "-i"
+
+Exporta los contactos de tu cuenta de Google voice en el formularioname==number
+
+.TP
+.I "-k KEYWORD"
+Establece una palabra clave que debe estar en el principio del mensaje de texto para que se devuelva. Esto es útil como una contraseña para analizar sólo ciertos mensajes.
+.TP
+.I "-m MESSAGE"
+Envía el mensaje que especifique. Esto debe estar entre comillas si contiene caracteres especiales o un espacio. El número también tiene que ser especificado de lo contrario no tendrá un mensaje para enviar
+.br
+.I "    Ej: gvapi -n +15551234 -m Hola"
+
+.TP
+.I "-n NUMBER"
+Se puede utilizar con el indicador -c para comprobar los mensajes de un determinado número o el indicador -m para enviar un mensaje. Puede estar en un formato sin el código del país, con sólo el código del país, o con un signo más y el código del país. Si lo primero, lo interpreta como un número estadounidense.
+.br
+.I "    Ej: gvapi -n 5551234 -c"
+
+.TP
+.I "-p PASSWORD"
+Se puede utilizar con el indicador -u para iniciar sesión manualmente. Si no se especifica, el programa utiliza el nombre de usuario y la contraseña predeterminados especificados en ~/.gv
+
+.TP
+.I "-r"
+Recibe y elimina SMS messges. Se puede utilizar con la bandera -c o sin ella. Es lo mismo que el indicador -c, pero en lugar de marcar los mensajes como leídos. Los elimina.
+
+.TP
+.I "-u USERNAME"
+Puede utilizarse con el indicador -p para iniciar sesión manualmente. Consulte el indicador -p para obtener más detalles. No se puede usar sin el -pflag.
+
+.TP
+.I "-v"
+Versión de salida y información del creador
+
+.SH AUTHOR
+.I "Steven Hickson (me@stevenhickson.com)"
+.SH BUGS
+No hay errores conocidos. Para reportar errores, envíe una descripción clara a me@stevenhickson.com
+Dado que este programa es bastante crudo, los errores tipográficos de los usuarios podrían causar fallos / respuestas fallidas. Por favor, lea la página de manual antes de enviar un error.
+.SH COPYRIGHT
+Copyright © 2013 Steven Hickson. Licencia GPLv3 +: GNU GPL versión 3 o posterior <http://gnu.org/licenses/gpl.html>.
+Éste es software libre: usted es libre de cambiar y de redistribuirlo mientras usted dé crédito al autor e incluya esta licencia. No hay GARANTÍA, en la medida permitida por la ley.
+.SH HISTORY
+
+Esta es la segunda versión principal de este programa
+.SH SEE ALSO
+http://stevenhickson.blogspot.com/
