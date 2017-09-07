@@ -23,7 +23,7 @@ sudo apt-get install -y libboost-dev libboost-regex-dev youtube-dl axel curl xte
 
 Para instalar PiAUISuite:
 ```bash
-git clone https://github.com/StevenHickson/PiAUISuite.git
+git clone https://github.com/tompoch2/PiAUISuite-Espanol.git
 cd PiAUISuite/Install
 ./InstallAUISuite.sh
 ```
